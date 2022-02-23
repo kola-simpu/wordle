@@ -1,4 +1,5 @@
 import datetime
+import logging
 import os
 
 import jwt
@@ -26,6 +27,8 @@ class Util:
                 'iat': datetime.datetime.utcnow(),
                 'sub': sub
             }
+            logging.debug(os.getenv('JWT_TOKEN'))
+            logging.debug(payload)
             return jwt.encode(payload, os.getenv('JWT_TOKEN'), algorithm='HS256').decode('utf-8')
         except Exception as e:
             raise e
