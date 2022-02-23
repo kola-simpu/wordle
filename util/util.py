@@ -1,13 +1,13 @@
 import datetime
-import logging
-from decouple import config as env
 
 import jwt
+from decouple import config as env
 
 
 class Util:
-    def authorize(request):
-        authorization = request.META.get('HTTP_AUTHORIZATION')
+    @staticmethod
+    def authorize(request: dict):
+        authorization = request.get('Authorization')
         if authorization:
             decoded_token = Util.decode_auth_token(authorization)
             return decoded_token
@@ -27,8 +27,6 @@ class Util:
                 'iat': datetime.datetime.utcnow(),
                 'sub': sub
             }
-            logging.debug(env('JWT_TOKEN'))
-            logging.debug(payload)
             return jwt.encode(payload, env('JWT_TOKEN'), algorithm='HS256').decode('utf-8')
         except Exception as e:
             raise e

@@ -1,15 +1,19 @@
 import json
+import logging
 
 from flask import jsonify
 
+from util.util import Util
+from flask import request
 
-def save(request):
-    decoded_token = Auth.authorization(request)
+def save():
+    decoded_token = Util.authorize(request.headers)
     uuid = decoded_token.get('payload_sub')
-    request_body = json.loads(request.body.decode('utf-8'))
+    request_body = request.get_json()
     if uuid:
         if request.method == 'POST':
-            pass
+            game_obj = {"name": request_body.get("name"), "word_id": request_body.get("word_id")}
+            logging.debug(game_obj)
         if request.method == 'PATCH':
             pass
         if request.method == 'DELETE':
