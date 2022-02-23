@@ -1,5 +1,3 @@
-import logging
-
 from flask import jsonify
 from flask import request
 

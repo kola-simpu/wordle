@@ -42,17 +42,17 @@ class PSQL:
 
     @staticmethod
     def update(table_name: str, column_obj: dict) -> str:
-        uuid = column_obj.pop('uuid')
+        obj_id = column_obj.pop('id')
         query = ' UPDATE {} SET '.format(table_name)
         set_values = []
         for column, value in column_obj.items():
             column_obj[column] = json.dumps(value) if isinstance(value, dict) else value
             set_values.append('{} = %({})s'.format(column, column))
         query += ', '.join(set_values)
-        query += ' WHERE uuid = %(uuid)s RETURNING uuid '
-        column_obj.update({'uuid': uuid})
+        query += ' WHERE id = %(obj_id)s RETURNING id '
+        column_obj.update({'id': obj_id})
         conn = PSQL(query, column_obj)
-        update_uuid = conn.execute().fetchone()['uuid']
+        update_uuid = conn.execute().fetchone()['id']
         conn.commit()
         return update_uuid
 
