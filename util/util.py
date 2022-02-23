@@ -28,7 +28,7 @@ class Util:
             }
             return jwt.encode(payload, os.getenv('JWT_TOKEN'), algorithm='HS256').decode('utf-8')
         except Exception as e:
-            return {'message': 'Internal server error'}, 505
+            raise e
 
     @staticmethod
     def decode_auth_token(auth_token):
