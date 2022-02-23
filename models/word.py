@@ -20,7 +20,7 @@ class Word:
     @staticmethod
     def delete(word_id):
         query_vars = {'id': word_id}
-        query = ' DELETE FROM words WHERE id = %(id)s '
+        query = ' DELETE FROM words WHERE id = %(id)s RETURNING id '
         conn = PSQL(query, query_vars)
         delete_id = conn.execute().fetchone()['id']
         conn.commit()
