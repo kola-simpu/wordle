@@ -28,7 +28,7 @@ class Word:
 
     @staticmethod
     def get_all_approved():
-        query = ' SELECT id, word FROM words '
+        query = ' SELECT id, word FROM words WHERE approved '
         conn = PSQL(query)
         result = conn.execute().fetchall()
         conn.close()
