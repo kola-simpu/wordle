@@ -5,7 +5,7 @@ from models.game import Game
 from util.util import Util
 
 
-def save():
+def save_game():
     decoded_token, status = Util.authorize(request.headers)
     uuid = decoded_token.get('payload_sub')
     request_body = request.get_json()

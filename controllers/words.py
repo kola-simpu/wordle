@@ -5,7 +5,7 @@ from models.word import Word
 from util.util import Util
 
 
-def save():
+def save_word():
     decoded_token, status = Util.authorize(request.headers)
     uuid = decoded_token.get('payload_sub')
     request_body = request.get_json()
