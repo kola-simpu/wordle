@@ -20,7 +20,7 @@ class Util:
         :return: string
         '''
         try:
-            sub = user.get('id')
+            sub = str(user.get('id'))
             payload = {
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(days=30, seconds=0),
                 'iat': datetime.datetime.utcnow(),
