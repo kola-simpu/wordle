@@ -37,7 +37,7 @@ def get_approved():
     decoded_token, status = Util.authorize(request.headers)
     uuid = decoded_token.get('payload_sub')
     if uuid:
-        if request.method == 'POST':
+        if request.method == 'GET':
             word_objs = Word.get_all_approved()
             return jsonify(word_objs), 200
         else:
