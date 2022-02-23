@@ -49,7 +49,7 @@ class PSQL:
             column_obj[column] = json.dumps(value) if isinstance(value, dict) else value
             set_values.append('{} = %({})s'.format(column, column))
         query += ', '.join(set_values)
-        query += ' WHERE id = %(obj_id)s RETURNING id '
+        query += ' WHERE id = %(id)s RETURNING id '
         column_obj.update({'id': obj_id})
         conn = PSQL(query, column_obj)
         update_uuid = conn.execute().fetchone()['id']
