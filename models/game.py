@@ -5,7 +5,7 @@ class Game:
     @staticmethod
     def create(game_obj):
         query = ' INSERT INTO games (name, word) ' \
-                ' VALUES (%(name)s,%(word)s) ' \
+                ' VALUES (%(name)s,%(word_id)s) ' \
                 ' RETURNING id '
         conn = PSQL(query, game_obj)
         insert_id = conn.execute().fetchone()['id']
