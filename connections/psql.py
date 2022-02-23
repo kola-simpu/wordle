@@ -1,6 +1,6 @@
 import json
 import logging
-import os
+from decouple import config as env
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -10,7 +10,7 @@ class PSQL:
     def __init__(self, query=None, query_vars=None):
         self.query = query
         self.query_vars = query_vars
-        self.conn = psycopg2.connect(host=os.getenv('DB_SERVER'), user=os.getenv('DB_USER'), password=os.getenv('DB_PASS'), database=os.getenv('DB_NAME'), port=os.getenv('DB_PORT'))
+        self.conn = psycopg2.connect(host=env('DB_SERVER'), user=env('DB_USER'), password=env('DB_PASS'), database=env('DB_NAME'), port=env('DB_PORT'))
 
     def execute(self):
         try:
